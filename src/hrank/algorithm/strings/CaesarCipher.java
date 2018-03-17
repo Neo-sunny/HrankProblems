@@ -5,31 +5,34 @@ import java.util.Scanner;
 public class CaesarCipher {
 
 	static String caesarCipher(String s, int k) {
-		// Complete this function
-		StringBuffer sbuf = new StringBuffer();
+		StringBuffer cipher = new StringBuffer();
+		while(k>26){
+			k=k-26;
+		}
 		for (char c : s.toCharArray()) {
-			Character.isLowerCase(c);
-			int x = (int) c;
-			if ((x > 96 && x < 124) || (x > 64 && x < 92)) {
-				int val = x + k;
-				if ((val > 123)) {
-					val = (val - 123) + 96;
-					sbuf.append((char) (val));
+			if (Character.isLowerCase(c)) {
+				int x = (int) c;
+				if (x + k > 122) {
+					int value = (x + k) - 122 + 96;
+					cipher.append((char) value);
 				} else {
-					sbuf.append((char) (val));
+					cipher.append((char) (x+k));
 				}
-				if (val > 91) {
-					val = (val - 91) + 64;
-					sbuf.append((char) (val));
-				} else {
-					sbuf.append((char) (val));
+			}else if(Character.isUpperCase(c)) {
+				int x = (int) c;
+				if (x + k > 90) {
+					int value = (x + k) - 90 + 64;
+					cipher.append((char) value);
+				}else {
+					cipher.append((char) (x+k));
 				}
-
-			} else {
-				sbuf.append((char) (x));
+			}else {
+				cipher.append(c);
 			}
 		}
-		return sbuf.toString();
+
+		return cipher.toString();
+			
 	}
 
 	public static void main(String[] args) {
